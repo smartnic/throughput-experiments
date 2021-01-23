@@ -40,19 +40,18 @@ function load_and_run {
     elf_file=$2
     patched_dir=$3
     echo "Loading $program compiled by clang"
-#    cp O1/$elf_file.o . 
-#    run_program $program
-#    rm $elf_file.o
-#    cp O2/$elf_file.o . 
-#    run_program $program
-#    rm $elf_file.o
-#    cp O3/$elf_file.o . 
-#    run_program $program
-#    rm $elf_file.o
+    cp O1/$elf_file.o . 
+    run_program $program
+    rm $elf_file.o
+    cp O2/$elf_file.o . 
+    run_program $program
+    rm $elf_file.o
+    cp O3/$elf_file.o . 
+    run_program $program
+    rm $elf_file.o
     patched_elf_file="${elf_file}0"
     for i in {1..16}; do
         current_elf=$patched_dir/$i/$patched_elf_file.o
-        echo "Trying $current_elf"
         if [[ ! -f $current_elf ]]; then
             continue 
         fi
