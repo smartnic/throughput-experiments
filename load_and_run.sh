@@ -24,6 +24,11 @@ function run_program {
         sudo ./xdp_redirect -N ens3f0 -N ens3f1 
     elif [[ $program = "xdp_map_access" ]]; then
         sudo ./xdp_map_access -N ens3f0
+    elif [[ $program = "xdp_fw" ]]; then
+        sudo ./xdp_fw
+    elif [[ $program = "xdp_router_ipv4" ]]; then
+        sudo ./xdp_router_ipv4 -S ens3f0
+    
     else 
         echo -e "${RED}Error${NC}: Program $program not recognized"
     fi
@@ -46,9 +51,9 @@ function load_and_run {
     cp O2/$elf_file.o . 
     run_program $program
     rm $elf_file.o
-    cp O3/$elf_file.o . 
-    run_program $program
-    rm $elf_file.o
+#    cp O3/$elf_file.o . 
+#    run_program $program
+#    rm $elf_file.o
     patched_elf_file="${elf_file}0"
     for i in {1..16}; do
         current_elf=$patched_dir/$i/$patched_elf_file.o
@@ -67,5 +72,6 @@ load_and_run xdp2 xdp2_kern completed-programs/kernel_samples_xdp2_kern_xdp1_run
 load_and_run xdp_pktcntr xdp_pktcntr completed-programs/katran_xdp_pktcntr_runtime_debug
 load_and_run xdp_redirect xdp_redirect_kern completed-programs/kernel_samples_xdp_redirect_runtime_debug
 load_and_run xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
-
-
+load_and_run xdp_fw xdp_fw_kern completed-programs/simple_fw_xdp_fw_runtime_debug
+load_and_run xdp_router_ipv4 xdp_router_ipv4_kern completed-programs/kernel_samples_xdp_router_ipv4_runtime_debug
+load_and_run xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
