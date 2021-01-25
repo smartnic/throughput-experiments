@@ -16,7 +16,7 @@ function run_program {
         sudo ./xdp2 -N ens3f0
     elif [[ $program = "xdp_pktcntr" ]]; then
         sudo ip link set dev ens3f0 xdp obj xdp_pktcntr.o sec xdp-pktcntr
-        read -n 1 -s -r -p "Press any key to load the next program"
+        read -n 1 -s -r -p "Press any key to unload program"
         echo ""
         sudo ip link set dev ens3f0 xdp off
         return
@@ -28,7 +28,11 @@ function run_program {
         sudo ./xdp_fw
     elif [[ $program = "xdp_router_ipv4" ]]; then
         sudo ./xdp_router_ipv4 -S ens3f0
-    
+    elif [[ $program = "xdp_fwd" ]]; then
+        sudo ./xdp_fwd ens3f0 ens3f1
+        read -n 1 -s -r -p "Press any key to unload program"
+        echo ""
+
     else 
         echo -e "${RED}Error${NC}: Program $program not recognized"
     fi
@@ -85,9 +89,10 @@ function load_and_run_top_5 {
     run_program $program
     rm $elf_file.o
 
-    for i in {1..5}; do
+    for i in {0..4}; do
         current_elf=$patched_dir/$elf_file$i.o
         if [[ ! -f $current_elf ]]; then
+            echo "$current_elf DNE"
             continue 
         fi
         echo -e "\nSuperopt $program $i"
@@ -99,11 +104,14 @@ function load_and_run_top_5 {
 
 }
 
-load_and_run_top_5 xdp1 xdp1_kern completed-programs/kernel_samples_xdp1_kern_xdp1_runtime_debug
-load_and_run_top_5 xdp2 xdp2_kern completed-programs/kernel_samples_xdp2_kern_xdp1_runtime_debug
-load_and_run_top_5 xdp_pktcntr xdp_pktcntr completed-programs/katran_xdp_pktcntr_runtime_debug
-load_and_run_top_5 xdp_redirect xdp_redirect_kern completed-programs/kernel_samples_xdp_redirect_runtime_debug
-load_and_run_top_5 xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
-load_and_run_top_5 xdp_fw xdp_fw_kern completed-programs/simple_fw_xdp_fw_runtime_debug
-load_and_run_top_5 xdp_router_ipv4 xdp_router_ipv4_kern completed-programs/kernel_samples_xdp_router_ipv4_runtime_debug
-load_and_run_top_5 xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
+#load_and_run_top_5 xdp1 xdp1_kern completed-programs/kernel_samples_xdp1_kern_xdp1_runtime_debug
+#load_and_run_top_5 xdp2 xdp2_kern completed-programs/kernel_samples_xdp2_kern_xdp1_runtime_debug
+#load_and_run_top_5 xdp_pktcntr xdp_pktcntr completed-programs/katran_xdp_pktcntr_runtime_debug
+#load_and_run_top_5 xdp_redirect xdp_redirect_kern completed-programs/kernel_samples_xdp_redirect_runtime_debug
+#load_and_run_top_5 xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
+#load_and_run_top_5 xdp_fw xdp_fw_kern completed-programs/simple_fw_xdp_fw_runtime_debug
+#load_and_run_top_5 xdp_router_ipv4 xdp_router_ipv4_kern completed-programs/kernel_samples_xdp_router_ipv4_runtime_debug
+#load_and_run_top_5 xdp_map_access xdp_map_access_kern completed-programs/simple_fw_xdp_map_access_runtime_debug
+load_and_run_top_5 xdp_fwd xdp_fwd_kern completed-programs/kernel_samples_xdp_fwd_kern_xdp_fwd_runtime_debug
+
+
