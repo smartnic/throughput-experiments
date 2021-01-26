@@ -19,7 +19,6 @@ function run_program {
         read -n 1 -s -r -p "Press any key to unload program"
         echo ""
         sudo ip link set dev ens3f0 xdp off
-        return
     elif [[ $program = "xdp_redirect" ]]; then
         sudo ./xdp_redirect -N ens3f0 -N ens3f1 
     elif [[ $program = "xdp_map_access" ]]; then
