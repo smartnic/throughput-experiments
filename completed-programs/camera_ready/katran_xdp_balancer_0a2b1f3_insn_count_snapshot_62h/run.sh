@@ -1,0 +1,16 @@
+ sudo cp 1/output0.o top-progs/1-output0.o
+ sudo cp 2/output0.o top-progs/2-output0.o
+ sudo cp 3/output17.o top-progs/3-output17.o
+ sudo cp 4/output0.o top-progs/4-output0.o
+ sudo cp 5/output0.o top-progs/5-output0.o
+ sudo cp 6/output19.o top-progs/6-output19.o
+ sudo cp 7/output0.o top-progs/7-output0.o 
+ sudo cp 8/output10.o top-progs/8-output10.o
+ sudo cp 9/output19.o top-progs/9-output19.o
+ sudo cp 10/output15.o top-progs/10-output15.o
+ sudo cp 11/output5.o top-progs/11-output5.o 
+ sudo cp 12/output0.o top-progs/12-output0.o
+ sudo cp 13/output0.o top-progs/13-output0.o
+ sudo cp 14/output0.o top-progs/14-output0.o
+ sudo cp 15/output1.o top-progs/15-output1.o
+ sudo cp 16/output17.o top-progs/16-output17.o 
