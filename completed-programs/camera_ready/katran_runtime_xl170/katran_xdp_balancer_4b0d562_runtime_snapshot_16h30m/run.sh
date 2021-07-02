@@ -1,0 +1,10 @@
+cp 1/output18.o top-progs/balancer_kern0.o
+cp 1/output17.o top-progs/balancer_kern1.o
+cp 1/output16.o top-progs/balancer_kern2.o
+cp 1/output15.o top-progs/balancer_kern3.o 
+cp 7/output14.o top-progs/balancer_kern4.o
+cp 1/output14.o top-progs/balancer_kern5.o
+cp 1/output13.o top-progs/balancer_kern6.o
+cp 7/output13.o top-progs/balancer_kern7.o
+cp 15/output19.o top-progs/balancer_kern8.o
+cp 7/output12.o top-progs/balancer_kern9.o
